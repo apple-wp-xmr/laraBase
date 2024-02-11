@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('surname');
+            $table->string('email')->unique();
+            $table->integer('age')->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_married')->default(false);
             $table->timestamps();
         });
     }
