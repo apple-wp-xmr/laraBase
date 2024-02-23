@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
-    /**
+   /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -24,12 +24,23 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string', 
+            'name' => 'required|string',
             'surname' => 'required|string',
-            'email' => 'required|email',
-            'age' => 'nullable|integer',
+            'age' => 'required|integer',
+            'email' => 'nullable|email',
             'description' => 'nullable|string',
             'is_married' => 'nullable|string'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'have to add name',
+        ];
+    }
 }
+
+
+
+

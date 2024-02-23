@@ -20,12 +20,13 @@ Route::get('/', function () {
 });
 
 Route::get('/workers', [WorkerController::class, 'index'])->name('worker.index');
-Route::get('/workers/create', [WorkerController::class, 'create'])->name('worker.create');
-Route::get('/workers/{worker}', [WorkerController::class, 'show'])->name('worker.show');
-Route::post('/workers', [WorkerController::class, 'store'])->name('worker.store');
 
-Route::get('/workers/{worker}/edit', [WorkerController::class, 'edit'])->name('worker.edit');
-Route::patch('/workers/{worker}', [WorkerController::class, 'update'])->name('worker.update');
+Route::get('/worker/show/{worker}', [WorkerController::class, 'show'])->name('worker.show');
 
- Route::delete('/workers/{worker}', [WorkerController::class, 'delete'])->name('worker.delete');
+Route::get('/worker/create', [WorkerController::class, 'create'])->name('worker.create');
+Route::post('/worker', [WorkerController::class, 'store'])->name('worker.store');
 
+Route::get('/worker/edit/{worker}', [WorkerController::class, 'edit'])->name('worker.edit');
+Route::patch('/worker/{worker}', [WorkerController::class, 'update'])->name('worker.update');
+
+Route::delete('/worker/{worker}', [WorkerController::class, 'delete'])->name('worker.delete');

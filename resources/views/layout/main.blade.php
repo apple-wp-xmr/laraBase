@@ -20,7 +20,7 @@
 </html>
 
 <style>
-    .my-nav svg {
+    .navigation svg {
         width: 20px;
     }
 </style>
