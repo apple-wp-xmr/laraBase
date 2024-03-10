@@ -5,6 +5,22 @@
     <div>
         <a href="{{ route('worker.create') }}">Create New</a>
     </div>
+    <div>
+        <form action="{{ route('worker.index') }}" method="GET">
+            <input type="text" name="name" placeholder="name" value="{{ request()->name }}">
+            <input type="text" name="surname" placeholder="surname" value="{{ request()->surname }}">
+            <input type="number" name="from" placeholder="from" value="{{ request()->from }}">
+            <input type="number" name="to" placeholder="to" value="{{ request()->to }}">
+            <input type="text" name="description" placeholder="description" value="{{ request()->description }}">
+            <input type="text" name="email" placeholder="email" value="{{ request()->email }}">
+            <label for="is_married">Is Married</label>
+            <input type="checkbox" name="is_married" {{ request()->is_married ? 'checked' : '' }}>
+
+            <input type="submit" value="Filter">
+
+            <a href="{{ route('worker.index') }}">Clear</a>
+        </form>
+    </div>
     @foreach ($workers as $worker)
         <div>{{ $worker->name }}</div>
         <div>{{ $worker->surname }}</div>
@@ -29,6 +45,6 @@
     @endforeach
 
     <div class="navigation">
-        {{ $workers->links() }}
+        {{ $workers->withQueryString()->links() }}
     </div>
 @endsection

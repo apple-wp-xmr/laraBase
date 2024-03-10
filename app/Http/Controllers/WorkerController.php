@@ -3,14 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Worker\CreateRequest;
+use App\Http\Requests\Worker\IndexRequest;
 use App\Http\Requests\Worker\UpdateRequest;
 use App\Models\Worker;
 
 
 class WorkerController extends Controller
 {
-    public function index(){
-        $workers = Worker::paginate(3);
+    public function index(IndexRequest $request){
+        $data =  $request->validated();
+
+  
+        $workersQuery = Worker::query();
+        if(isset($data['name'])){
+            $workersQuery->where('name', 'like', "%{$data['name']}%");
+        }
+        if(isset($data['surname'])){
+            $workersQuery->where('surname', 'like', "%{$data['surname']}%");
+        }
+
+        if(isset($data['from'])){
+            $workersQuery->where('age', '>',  $data['from']);
+        }
+        if(isset($data['to'])){
+            $workersQuery->where('age', '<', $data['to'] );
+        }
+
+        if(isset($data['description'])){
+            $workersQuery->where('description', 'like', "%{$data['description']}%");
+        }
+        if(isset($data['email'])){
+            $workersQuery->where('email', 'like', "%{$data['email']}%");
+        }
+        if(isset($data['is_married'])){
+            $workersQuery->where('is_married', true);
+        }
+        $workers = $workersQuery->paginate(3);
+
         return view('worker.index', compact('workers'));
     }
 
