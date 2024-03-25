@@ -15,4 +15,18 @@ class Worker extends Model
     public function profile(){
         return $this->hasOne(Profile::class, 'worker_id', 'id');
     }
+
+    public function avatar(){
+        return $this->morphOne(Avatar::class, 'avatarable');
+    }
+
+    public function reviews(){
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
 }

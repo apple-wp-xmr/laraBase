@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Avatar extends Model
 {
     use HasFactory;
+    protected $guarded = false;
+    protected $table = 'avatars';
+
+    public function avatarable(){
+        return $this->morthTo();
+    }
+
+ 
 }
