@@ -36,22 +36,15 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        $this->prepareData();
-        $this->prepareManyToMany();
-        $this->createClient();
+        // $this->prepareData();
+        // $this->prepareManyToMany();
+        // $this->createClient();
         // $this->createTags();
-        $this->populate();
+        // $this->populate();
 
+        // $profile = Position::first();
+        // dd($profile->queryWorker);
 
-    }
-
-    public function createTags(){
-        Tag::create([
-            'title' => 'developer'
-        ]);
-        Tag::create([
-            'title' => 'big boss'
-        ]);
     }
 
     public function populate(){
@@ -70,6 +63,15 @@ class DevCommand extends Command
             'path' => 'worker1 avatar'
         ]);
         $client->tags()->attach([1]);
+    }
+
+    public function createTags(){
+        Tag::create([
+            'title' => 'developer'
+        ]);
+        Tag::create([
+            'title' => 'big boss'
+        ]);
     }
 
     public function createClient(){
