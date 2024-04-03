@@ -36,14 +36,8 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        // $this->prepareData();
-        // $this->prepareManyToMany();
-        // $this->createClient();
-        // $this->createTags();
-        // $this->populate();
-
-        // $profile = Position::first();
-        // dd($profile->queryWorker);
+        $profile = Position::first();
+        dd($profile->queryWorker);
 
     }
 

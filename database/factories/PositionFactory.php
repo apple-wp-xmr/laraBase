@@ -18,7 +18,8 @@ class PositionFactory extends Factory
     public function definition()
     {
         return [
-    
+            'title' => fake()->jobTitle,
+            'department_id' => Department::inRandomOrder()->first()->id
         ];
     }
 }

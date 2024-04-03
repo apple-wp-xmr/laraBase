@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Worker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WorkerSeeder extends Seeder
@@ -15,6 +14,6 @@ class WorkerSeeder extends Seeder
      */
     public function run()
     {
-   
+        Worker::factory(50)->create();
     }
 }

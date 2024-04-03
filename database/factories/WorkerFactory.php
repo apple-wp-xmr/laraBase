@@ -18,7 +18,12 @@ class WorkerFactory extends Factory
     public function definition()
     {
         return [
-            
+            'name' => fake()->userName,
+            'surname' => fake()->lastName,
+            "email" => fake()->unique()->safeEmail(),
+            "age" => fake()->numberBetween(),
+            "description" => fake()->text(250),
+            "position_id" => Position::inRandomOrder()->first()->id
         ];
     }
 }

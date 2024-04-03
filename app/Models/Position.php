@@ -16,6 +16,9 @@ class Position extends Model
     }
 
     public function queryWorker(){
-        return $this->hasOne(Worker::class)->where('name', 'Kate');
+        return $this->hasOne(Worker::class)->ofMany('age', 'min');
     }
+    // public function queryWorker(){
+    //     return $this->hasOne(Worker::class)->where('name', '')
+    // }
 }
