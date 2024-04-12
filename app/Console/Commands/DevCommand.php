@@ -36,9 +36,10 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        $profile = Position::first();
-        dd($profile->queryWorker);
-
+        $worker = Worker::find(1);
+        $worker->update([
+            'age' => '76.00'
+        ]);
     }
 
     public function populate(){
