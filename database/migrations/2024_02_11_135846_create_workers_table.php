@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_married')->default(false);
             $table->foreignId('position_id')->constrained('positions');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

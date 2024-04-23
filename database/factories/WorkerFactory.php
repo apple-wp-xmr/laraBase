@@ -21,7 +21,7 @@ class WorkerFactory extends Factory
             'name' => fake()->userName,
             'surname' => fake()->lastName,
             "email" => fake()->unique()->safeEmail(),
-            "age" => fake()->numberBetween(),
+            "age" => fake()->numberBetween(20, 70),
             "description" => fake()->text(250),
             "position_id" => Position::inRandomOrder()->first()->id
         ];
