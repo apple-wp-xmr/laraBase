@@ -13,7 +13,6 @@ class WorkerController extends Controller
     public function index(IndexRequest $request){
         $data =  $request->validated();
 
-  
         $workersQuery = Worker::query();
         if(isset($data['name'])){
             $workersQuery->where('name', 'like', "%{$data['name']}%");
@@ -21,14 +20,12 @@ class WorkerController extends Controller
         if(isset($data['surname'])){
             $workersQuery->where('surname', 'like', "%{$data['surname']}%");
         }
-
         if(isset($data['from'])){
             $workersQuery->where('age', '>',  $data['from']);
         }
         if(isset($data['to'])){
             $workersQuery->where('age', '<', $data['to'] );
         }
-
         if(isset($data['description'])){
             $workersQuery->where('description', 'like', "%{$data['description']}%");
         }
@@ -40,40 +37,44 @@ class WorkerController extends Controller
         }
         $workers = $workersQuery->paginate(3);
 
-        return view('worker.index', compact('workers'));
+        return view('workers.index', compact('workers'));
     }
 
     public function show(Worker $worker){
-        return view('worker.show', compact('worker'));
+        return view('workers.show', compact('worker'));
     }
 
     public function create(){
-        return view('worker.create');
+        $this->authorize('create', Worker::class);
+        return view('workers.create');
     }
 
-    public function store(CreateRequest $request){
+    public function store(StoreRequest $request){
+        $this->authorize('create', Worker::class);
         $data = $request->validated();
         $data['is_married'] = isset($data['is_married']);
 
         $worker = Worker::create($data);
-            
-        return redirect()->route('worker.show', $worker->id);
+        return redirect()->route('workers.show', $worker->id);
     }
 
     public function edit(Worker $worker){
-        return view('worker.edit', compact('worker'));
+        $this->authorize('create', $worker);
+        return view('workers.edit', compact('worker'));
     }
 
     public function update(UpdateRequest $request, Worker $worker){
+        $this->authorize('create', $worker);
         $data = $request->validated();
         $data['is_married'] = isset($data['is_married']);
 
         $worker->update($data);
-        return redirect()->route('worker.show', $worker->id);
+        return redirect()->route('workers.show', $worker->id);
     }
 
-    public function delete(Worker $worker){
+    public function destroy(Worker $worker){
+        $this->authorize('delte', $worker);
         $worker->delete();
-         return redirect()->route('worker.index');
+        return redirect()->route('workers.index');
     }
 }

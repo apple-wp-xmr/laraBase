@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public static $ROLE_ADMIN = 1;
+    public static $ROLE_USER = 2;
+
     /**
      * The attributes that are mass assignable.
      *

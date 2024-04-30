@@ -9,5 +9,5 @@
     <div>{{ $worker->description }}</div>
     <div>{{ $worker->is_married }}</div>
 
-    <a href="{{ route('worker.index') }}">назад</a>
+    <a href="{{ route('workers.index') }}">назад</a>
 @endsection

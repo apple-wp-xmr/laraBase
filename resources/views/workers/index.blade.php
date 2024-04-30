@@ -2,11 +2,13 @@
 
 
 @section('content')
+    @can('create', \App\Models\Worker::class)
+        <div>
+            <a href="{{ route('workers.create') }}">Create New</a>
+        </div>
+    @endcan
     <div>
-        <a href="{{ route('worker.create') }}">Create New</a>
-    </div>
-    <div>
-        <form action="{{ route('worker.index') }}" method="GET">
+        <form action="{{ route('workers.index') }}" method="GET">
             <input type="text" name="name" placeholder="name" value="{{ request()->name }}">
             <input type="text" name="surname" placeholder="surname" value="{{ request()->surname }}">
             <input type="number" name="from" placeholder="from" value="{{ request()->from }}">
@@ -18,7 +20,7 @@
 
             <input type="submit" value="Filter">
 
-            <a href="{{ route('worker.index') }}">Clear</a>
+            <a href="{{ route('workers.index') }}">Clear</a>
         </form>
     </div>
     @foreach ($workers as $worker)
@@ -29,18 +31,22 @@
         <div>{{ $worker->description }}</div>
         <div>{{ $worker->is_married }}</div>
         <div>
-            <a href="{{ route('worker.show', $worker->id) }}">Show</a>
+            <a href="{{ route('workers.show', $worker->id) }}">Show</a>
         </div>
-        <div>
-            <a href="{{ route('worker.edit', $worker->id) }}">Edit</a>
-        </div>
-        <div>
-            <form action="{{ route('worker.delete', $worker->id) }}" method="post">
-                @csrf
-                @method('delete')
-                <input type="submit" value="Delete">
-            </form>
-        </div>
+        @can('update', $worker)
+            <div>
+                <a href="{{ route('workers.edit', $worker->id) }}">Edit</a>
+            </div>
+        @endcan
+        @can('delete', $worker)
+            <div>
+                <form action="{{ route('workers.destroy', $worker->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
+        @endcan
         <hr>
     @endforeach
 
