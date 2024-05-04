@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Worker\CreateRequest;
+use App\Http\Requests\Worker\StoreRequest;
 use App\Http\Requests\Worker\IndexRequest;
 use App\Http\Requests\Worker\UpdateRequest;
 use App\Models\Worker;
