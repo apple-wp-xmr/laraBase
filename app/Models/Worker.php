@@ -13,7 +13,7 @@ class Worker extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use HasFilter;
+
 
     protected $table = 'workers';
     public $guarded = false;

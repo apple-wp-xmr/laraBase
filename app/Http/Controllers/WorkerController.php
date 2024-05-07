@@ -13,12 +13,6 @@ class WorkerController extends Controller
 {
     public function index(IndexRequest $request){
 
-        $data =  $request->validated();
-        
-        $filter = app()->make(WorkerFilter::class, ['params' => $data]);
-        $workerQuery = Worker::filter($filter);
-
-        $workers = $workerQuery->paginate(3);
 
         return view('workers.index', compact('workers'));
     }

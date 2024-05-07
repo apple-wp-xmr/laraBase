@@ -31,10 +31,8 @@ class DevCommand extends Command
     public function handle()
     {
         $workerQuery = Worker::query();
-
-        $filter = new WorkerFilter(['from' => 60]);
+        $filter = new WorkerFilter(['from' => 40, 'name' => 'h']);
         $filter->applyFilter($workerQuery);
-
         dd($workerQuery->get());
     }
 }
