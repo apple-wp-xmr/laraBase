@@ -9,6 +9,7 @@ use App\Http\Resources\WorkerResource;
 use App\Models\Worker;
 use Illuminate\Http\Request;
 
+
 class WorkerController extends Controller
 {
     public function index()
@@ -28,17 +29,18 @@ class WorkerController extends Controller
         return WorkerResource::make($worker)->resolve();
     }
 
-    public function update(UpdateRequest $request, Worker $worker){
+    public function update(Worker $worker, UpdateRequest $request){
         $data = $request->validated();
         $worker->update($data);
         $worker->fresh();
         return WorkerResource::make($worker)->resolve();
-    }
 
+    }
     public function destroy(Worker $worker){
-        // is is soft delete
         $worker->delete();
-        return response()->json('worker has been deleted');
+        return response()->json(
+            'Worker has been deleted!'
+        );
     }
 
 }

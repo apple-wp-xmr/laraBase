@@ -32,7 +32,7 @@ class DevCommand extends Command
     {
         $workerQuery = Worker::query();
         $filter = new WorkerFilter(['from' => 40, 'name' => 'h']);
-        $filter->applyFilter($workerQuery);
+        $filter->applyFilters($workerQuery);
         dd($workerQuery->get());
     }
 }

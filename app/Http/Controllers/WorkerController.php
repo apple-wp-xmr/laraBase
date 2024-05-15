@@ -13,6 +13,12 @@ class WorkerController extends Controller
 {
     public function index(IndexRequest $request){
 
+        $data = $request->validated();
+        $workerQuery = Worker::query();
+
+        $filter = new WorkerFilter($data);
+        $filter->applyFilters($workerQuery);
+        $workers = $workerQuery->paginate(5);
 
         return view('workers.index', compact('workers'));
     }
