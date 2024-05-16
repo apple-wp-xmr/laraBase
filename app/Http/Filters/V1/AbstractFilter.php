@@ -4,24 +4,12 @@ namespace App\Http\Filters\V1;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class PostFilter{
-
-    const TITLE = 'title';
-    const VIEW = 'view';
- 
-
+abstract class  AbstractFilter implements FilterInterface {
     public array $params = [];
 
     public function __construct($params)
     {
         $this->params = $params;
-    }
-
-    public function getCallbacks(){
-        return [
-            self::TITLE => 'title',
-            self::VIEW => 'view',
-        ];
     }
 
     public function applyFilters(Builder $builder){
@@ -32,13 +20,5 @@ class PostFilter{
         }
     }
 
-    public function title(Builder $builder, $value){
-        $builder->where('title', 'like', "%{$value}%");
-    }
-
-    public function view(Builder $builder, $value){
-        $builder->where('view', '>', $value);
-    }
-
-
+    abstract public function getCallbacks();
 }

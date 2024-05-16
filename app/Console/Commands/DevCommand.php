@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Filters\V1\WorkerFilter;
+use App\Http\Filters\V2\Worker\Age;
 use App\Jobs\SomeJob;
 use App\Models\Worker;
 use Illuminate\Console\Command;
+use Illuminate\Pipeline\Pipeline;
 
 class DevCommand extends Command
 {
@@ -30,9 +31,15 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        $workerQuery = Worker::query();
-        $filter = new WorkerFilter(['from' => 40, 'name' => 'h']);
-        $filter->applyFilters($workerQuery);
-        dd($workerQuery->get());
+
+        request()->merge(['age' => 27]);
+        $workers = app()->make(Pipeline::class)
+            ->send(Worker::query())
+            ->through([
+                Age::class
+            ])
+            ->thenReturn();
+
+        dd($workers->get());
     }
 }

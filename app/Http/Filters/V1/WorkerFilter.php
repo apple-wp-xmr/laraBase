@@ -2,23 +2,16 @@
 
 namespace App\Http\Filters\V1;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
-class WorkerFilter{
+class WorkerFilter extends AbstractFilter {
 
     const NAME = 'name';
     const SURNAME = 'surname';
     const AGE_FROM = 'from';
     const AGE_TO = 'to';
     const DESCRIPTION = 'description';
-    const IS_MARRIED = 'isMarried';
-
-    public array $params = [];
-
-    public function __construct($params)
-    {
-        $this->params = $params;
-    }
+    const IS_MARRIED = 'is_married';
 
     public function getCallbacks(){
         return [
@@ -29,14 +22,6 @@ class WorkerFilter{
             self::DESCRIPTION => 'description',
             self::IS_MARRIED => 'isMarried',
         ];
-    }
-
-    public function applyFilters(Builder $builder){
-        foreach($this->getCallbacks() as $key => $callback){
-            if(isset($this->params[$key])){
-                $this->$callback($builder, $this->params[$key]);
-            }
-        }
     }
 
     public function name(Builder $builder, $value){
